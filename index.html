@@ -1,0 +1,55 @@
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>`filterLike` test</title>
+		<script src="https://raw.github.com/rafaelrinaldi/filter-like/master/source/js/filter_like.js" type="text/javascript"></script>
+	</head>
+	
+	<body style="font-family: arial; margin: 20px">
+		<h1 style="background-color: black; color: white; padding: 10px; width: 260px;"><span style="color: red; font-family: courier new">filterLike</span> test</h1>
+		<p id="stack"></p>
+		<script>
+			
+			// @see http://github.com/rafaelrinaldi/filter-like
+			
+			function appendToStack( p_message ) {
+				document.getElementById("stack").innerHTML += p_message;
+			}
+			
+			var arr = ["rafael", "gabriel", "arthur", "cassio", "lucas", "29/05/2009", "10/10/2010"];
+			
+			// Return items that begin with "r"
+			appendToStack(filterLike(arr, "r%") + "<br /><strong>Should prompt</strong>: rafael<hr />");
+
+			// Return items that begin with "ga"
+			appendToStack(filterLike(arr, "ga%") + "<br /><strong>Should prompt</strong>: gabriel<hr />");
+
+			// Return items that contain "r"
+			appendToStack(filterLike(arr, "%r%") + "<br /><strong>Should prompt</strong>: rafael,gabriel,arthur<hr />");
+
+			// Return items that contain "ss"
+			appendToStack(filterLike(arr, "%ss%") + "<br /><strong>Should prompt</strong>: cassio<hr />");
+
+			// Return items that ends with "l"
+			appendToStack(filterLike(arr, "%l") + "<br /><strong>Should prompt</strong>: rafael,gabriel<hr />");
+
+			// Return items that ends with "el"
+			appendToStack(filterLike(arr, "%el") + "<br /><strong>Should prompt</strong>: rafael,gabriel<hr />");
+
+			// Return items with second character equals to "a"
+			appendToStack(filterLike(arr, "_a") + "<br /><strong>Should prompt</strong>: rafael,gabriel,cassio<hr />");
+
+			// Return items with third character equals to "c"
+			appendToStack(filterLike(arr, "__c") + "<br /><strong>Should prompt</strong>: lucas<hr />");
+
+			// Return items with four last characters equals to "2009"
+			appendToStack(filterLike(arr, "______2009") + "<br /><strong>Should prompt</strong>: 29/05/2009<hr />");
+
+			// Multiple filters
+			appendToStack(filterLike(arr, "%/%", "_a", "l%")+ "<br /><strong>Should prompt</strong>: rafael,gabriel,cassio,lucas,29/05/2009,10/10/2010");
+			
+		</script>
+	</body>
+	
+</html>
